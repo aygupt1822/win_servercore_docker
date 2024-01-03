@@ -1,6 +1,7 @@
 # Windows_Servercore_Rust_MSYS2 Dockerfile
 
 This is a Dockerfile for creating windows servercore (ltsc 2019) as a base image with rust (GNU) and MSYS2 (GNU toolchain).
+Image avaliable on dockerhub as : `docker pull ayush1822/win_servercore_ltsc-2019-gnu_rust-msys2`
 
 ### Windows Servercore image used
 

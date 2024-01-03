@@ -1,7 +1,7 @@
 # escape=`
 
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
-# Using WIndows Servercore image ltsc 2019
+# Using Windows Servercore image ltsc 2019
 
 SHELL ["powershell.exe", "-NoLogo", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -51,7 +51,9 @@ RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tl
 
 
 #Installing git
-RUN Invoke-WebRequest 'https://github.com/git-for-windows/git/releases/download/v2.12.2.windows.2/MinGit-2.12.2.2-64-bit.zip' -OutFile MinGit.zip; `
+RUN [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; `
+    $url = 'https://github.com/git-for-windows/git/releases/download/v2.12.2.windows.2/MinGit-2.12.2.2-64-bit.zip'
+    Invoke-WebRequest -UseBasicParsing -uri $url -OutFile MinGit.zip; `
     Expand-Archive c:\MinGit.zip -DestinationPath c:\MinGit; `
     $newPath = $env:PATH + ';C:\MinGit\cmd\;C:\MinGit\cmd'; `
     [Environment]::SetEnvironmentVariable('PATH', $newPath, [EnvironmentVariableTarget]::Machine); `
